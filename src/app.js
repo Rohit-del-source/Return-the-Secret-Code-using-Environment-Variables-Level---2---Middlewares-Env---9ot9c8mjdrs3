@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
-
 function encryptString(str) {
   let encrypted = '';
   for (let i = 0; i < str.length; i++) {
@@ -24,7 +23,10 @@ Use the encryptString function given above to encrypt the secret code
 */
 
 app.get('/api/get-env', (req, res) => {
-    //Write your code here
+  //Write your code here
+  const secretKey = process.env.SECRET;
+    const encryptedData = encryptString(secretKey);
+    res.status(200).send({"secret":`${encryptedData}`})
 });
 
 module.exports = app;
